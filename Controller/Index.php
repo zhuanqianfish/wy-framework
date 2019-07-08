@@ -1,10 +1,5 @@
 <?php
-//	ThinkphpHelper v0.3
-//
-//	weiyunstudio.com
-//	sjj zhuanqianfish@gmail.com
-//	2014年9月18日
-namespace TPH\Controller;
+namespace WY\Controller;
 
 class IndexController extends Controller{
     public function index(){   	

@@ -2,7 +2,7 @@
 return [
 	// required
 	'database_type' => 'mysql',
-	'database_name' => 'dbname',
+	'database_name' => 'databsse',
 	'server' => 'localhost',
 	'username' => 'root',
 	'password' => 'root',
