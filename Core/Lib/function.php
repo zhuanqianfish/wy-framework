@@ -47,24 +47,27 @@ function param($key){
 
 
 /**
-  * Clean Keys - 来自CI框架的非法字符过滤方法  Input.php
-  *
-  * This is a helper function. To prevent malicious users
-  * from trying to exploit keys we make sure that keys are
-  * only named with alpha-numeric text and a few other items.
-  *
-  * @access private
-  * @param string
-  * @return string
+  * 防止sql注入
   */
-  function _clean_input_keys($str)
+  function _clean_input_keys($name)
   {
-    if ( ! preg_match("/^[a-z0-9:!_//-]+$/i", $str))
-    {
-        exit('Disallowed Key Characters.');
-    }
- 
-    return $str;
+    if($name === null) return null;
+      
+   if (!get_magic_quotes_gpc()) // 判断magic_quotes_gpc是否为打开    
+   {    
+      $post = addslashes($name); // magic_quotes_gpc没有打开的时候把数据过滤    
+   }    
+
+   $name = str_replace("_", "\_", $name); // 把 '_'过滤掉  
+
+   $name = str_replace("%", "\%", $name); // 把' % '过滤掉    
+
+   $name = nl2br($name); // 回车转换    
+
+   $name= htmlspecialchars($name); // html标记转换   
+
+   return $name;
+    
   }
 /////////////////////////////////////////////////////////
 

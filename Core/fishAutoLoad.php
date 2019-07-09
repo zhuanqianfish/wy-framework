@@ -30,7 +30,8 @@ function fishAudoLoad($baseDir){
 	}
 }
 
-
 fishAudoLoad(LIB_PATH);
 fishAudoLoad(CORE_PATH);
+fishAudoLoad(COMMON_PATH);
+
 ?>
