@@ -1,8 +1,9 @@
 <?php
-namespace WY\Controller;
+namespace Controller;
+use Core\WY\Controller as Controller;
 
-class IndexController extends Controller{
+class Index extends Controller{
     public function index(){   	
-		$this->display("Index/index");
+	    $this->display("Index/index");
     }
 }

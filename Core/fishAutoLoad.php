@@ -3,7 +3,7 @@
 defined("BASE_PATH") or exit('Access Denied');
 
 //仅获取文件列表
-function getFileList($directory){
+function _getFileList($directory){
 	$files = [];        
 	try {        
 		$dir = new \DirectoryIterator($directory);        
@@ -19,19 +19,32 @@ function getFileList($directory){
 	return $files; 
 }
 
-//自动加载类库
-function fishAudoLoad($baseDir){
+//目录下全部加载
+function  autoLoadAllInFolder($baseDir){
 	$ignoreFileList = ['index.html','index.htm'];	//忽略加载文件列表
-	$fileArray = getFileList($baseDir);
+	$fileArray = _getFileList($baseDir);
 	foreach($fileArray as $file){
 		if(!array_search($file, $ignoreFileList)){
-			require $baseDir.$file;
+			require_once $baseDir.$file;
 		}
 	}
 }
 
-fishAudoLoad(LIB_PATH);
-fishAudoLoad(CORE_PATH);
-fishAudoLoad(COMMON_PATH);
+//自动加载类库
+function fishAutoLoad($className, $fileSuffix='.php'){
+	$file = str_replace('\\', DIRECTORY_SEPARATOR, $className).$fileSuffix;
+	if (file_exists($file))
+	{
+		require_once $file;
+		return true;
+	}
+	return false;
+}
 
+spl_autoload_register("fishAutoLoad", true);
+
+require_once(VENDOR_PATH.'autoload.php');	//composer 自动加载
+
+autoLoadAllInFolder(CORE_PATH);
+require_once(COMMON_PATH.'function.php');	//加载助手函数
 ?>
