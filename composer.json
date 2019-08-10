@@ -1,10 +1,10 @@
 {
-    "name": "zhuanqianfish/wyFramework",
+    "name": "zhuanqianfish/wy-framework",
     "description": "a php framework just by dint of interest.",
     "type": "project",
     "keywords": [
         "framework",
-        "wyFramework",
+        "wyframework",
         "ORM"
     ],
     "homepage": "https://github.com/zhuanqianfish/wyFramework/",
