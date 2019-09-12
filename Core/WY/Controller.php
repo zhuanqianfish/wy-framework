@@ -17,6 +17,11 @@ class Controller {
 		echo $this->view->fetch($viewPath);
 	}
 	
+	//注册变量
+	protected function assign($name, $value){
+		$this->view->assign($name, $value);
+	}
+
 	////start 废弃不用
 	//渲染模板
 	protected function display_($viewPath){
@@ -24,11 +29,6 @@ class Controller {
 		$viewName = $viewPathArray[0];
 		$fullViewPath = VIEW_PATH.$viewName.'/'.$viewPathArray[1].VIEW_TEMPLATE_SUFFIX;
 		include $fullViewPath;
-	}
-	
-	//注册变量
-	protected function assign($name, $value){
-		$this->varables[$name] = $value;
 	}
 
 	//读取变量

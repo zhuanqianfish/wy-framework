@@ -28,6 +28,36 @@ function isAjax(){
     }
 }
 
+//获取分页文件
+//pageNum: 每页记录数
+//count:    总记录数
+//tpl : 分页模板 暂不实现
+function pageHtml($pageNum, $count, $tpl=''){
+    if($tpl == ''){
+        $tpl = '<ul class="pagination">';
+    }
+    $i = 1;
+    $now = $i*$pageNum;
+    $tempPageIndex = 1;
+    if(isset($_GET['p'])){
+        $tempPageIndex = $_GET['p'];
+        unset($_GET['p']);
+    }
+    while($now < $count + $pageNum){
+        $_GET['p'] = $i;
+        $url = $_SERVER['PHP_SELF'].'?'.http_build_query($_GET);
+        if($tempPageIndex == $i){
+            $tpl .= "<li class=\"current\" ><span>{$i}</span></li>";
+        }else{
+            $tpl .= '<li><a href="'.$url.'">'.$i.'</a></li>';
+        }
+        $i++;
+        $now = $i*$pageNum;
+    }
+    $tpl .= '</ul>';
+    return $tpl;
+}
+
 ////////////////////////////////////////////////////////////
 //获取请求参数 ,
 function param($key){
