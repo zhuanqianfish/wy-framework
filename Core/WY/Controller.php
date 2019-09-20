@@ -9,6 +9,7 @@ class Controller {
 	protected	$view;
 	
 	function __construct(){
+		session_start();
 		$this->db = new medoo(wyconfig());	//数据库操作medoo对象
 		$this->view = new \Core\WY\Template(['view_base'=>VIEW_PATH]);	//模板引擎对象
 	}
@@ -20,6 +21,11 @@ class Controller {
 	//注册变量
 	protected function assign($name, $value){
 		$this->view->assign($name, $value);
+	}
+
+	//跳转
+	protected function redirect($url){
+		header("location:index.php?$url");exit();
 	}
 
 	////start 废弃不用
